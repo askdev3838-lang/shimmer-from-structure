@@ -37,12 +37,17 @@ function extractElementInfo(element: Element, parentRect: DOMRect): ElementInfo[
 
   // If this is a leaf element, capture it
   if (isLeafElement(element)) {
+    // Get computed border-radius from the element's styles
+    const computedStyle = window.getComputedStyle(element);
+    const computedBorderRadius = computedStyle.borderRadius || '0px';
+
     const info: ElementInfo = {
       x: rect.left - parentRect.left,
       y: rect.top - parentRect.top,
       width: rect.width,
       height: rect.height,
       tag: element.tagName.toLowerCase(),
+      borderRadius: computedBorderRadius,
     };
     elements.push(info);
   } else {
@@ -64,7 +69,7 @@ export const Shimmer: React.FC<ShimmerProps> = ({
   shimmerColor = 'rgba(255, 255, 255, 0.15)',
   backgroundColor = 'rgba(255, 255, 255, 0.08)',
   duration = 1.5,
-  borderRadius = 4,
+  fallbackBorderRadius = 4,
   templateProps,
 }) => {
   const [elements, setElements] = useState<ElementInfo[]>([]);
@@ -167,7 +172,9 @@ export const Shimmer: React.FC<ShimmerProps> = ({
               width: `${element.width}px`,
               height: `${element.height}px`,
               backgroundColor,
-              borderRadius: `${borderRadius}px`,
+              borderRadius: element.borderRadius === '0px'
+                ? `${fallbackBorderRadius}px`
+                : element.borderRadius,
               overflow: 'hidden',
             }}
           >

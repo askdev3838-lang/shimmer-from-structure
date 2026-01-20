@@ -81,7 +81,7 @@ const teamTemplate: TeamMember[] = [
   { id: '1', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
   { id: '2', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
   { id: '3', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
-  { id: '4', name: 'Loading...', role: 'Role', avatar: 'https://via.placeholder.com/40' },
+  { id: '4', name: 'Loading...', role: 'Backend Developer', avatar: 'https://via.placeholder.com/40' },
 ];
 
 // =============================================================================
