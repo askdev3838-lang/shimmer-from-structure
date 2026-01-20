@@ -3,9 +3,6 @@ import { render, screen, act } from '@testing-library/react';
 import { Shimmer } from './Shimmer';
 import React from 'react';
 
-// Help helper to advance timers since we use setTimeout in Shimmer
-const advanceTimers = () => act(() => vi.advanceTimersByTime(100));
-
 describe('Shimmer', () => {
     beforeEach(() => {
         vi.useFakeTimers();
@@ -76,7 +73,7 @@ describe('Shimmer', () => {
             borderRadius: '0px',
         }) as any;
 
-        const { container } = render(
+        render(
             <Shimmer loading={true} fallbackBorderRadius={12}>
                 <div>Content</div>
             </Shimmer>
@@ -87,10 +84,8 @@ describe('Shimmer', () => {
             vi.runAllTimers();
         });
 
-        // Check if any shimmer block has the fallback border radius
-        // Since we can't easily query the generated shimmer blocks' styles directly in jsdom without better mocking,
-        // this test mainly verifies no crash. 
-        // Ideally we would inspect the style attribute of the generated div.
+        // Restore original
+        window.getComputedStyle = originalGetComputedStyle;
     });
 
     it('retries measurement for async components that render late', async () => {

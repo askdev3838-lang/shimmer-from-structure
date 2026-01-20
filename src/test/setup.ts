@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 // Mock getBoundingClientRect since jsdom doesn't support layout
 Element.prototype.getBoundingClientRect = vi.fn(() => ({
