@@ -92,4 +92,40 @@ describe('Shimmer', () => {
         // this test mainly verifies no crash. 
         // Ideally we would inspect the style attribute of the generated div.
     });
+
+    it('retries measurement for async components that render late', async () => {
+        // Async component that renders content after a delay
+        function AsyncComponent() {
+            const [ready, setReady] = React.useState(false);
+
+            React.useEffect(() => {
+                const timer = setTimeout(() => setReady(true), 50);
+                return () => clearTimeout(timer);
+            }, []);
+
+            if (!ready) return <div />;
+            return <div className="async-content">Ready</div>;
+        }
+
+        const { container } = render(
+            <Shimmer loading={true}>
+                <AsyncComponent />
+            </Shimmer>
+        );
+
+        // Initially should have no shimmer blocks (or empty container fallback)
+        // Advance timers by less than retry delay
+        act(() => {
+            vi.advanceTimersByTime(50); // Component updates state
+        });
+
+        // Advance timers to trigger Shimmer retry (retryDelay is 100ms)
+        act(() => {
+            vi.advanceTimersByTime(100);
+        });
+
+        // Should now detect the element
+        // We expect the shimmer logic to have run again
+        expect(container.querySelector('.shimmer-measure-container')).toBeInTheDocument();
+    });
 });

@@ -2,6 +2,8 @@
 
 A React shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
 
+![Shimmer Effects Demo](./example/preview.gif)
+
 ## 🎯 Why This Library?
 
 Traditional shimmer libraries require you to:
