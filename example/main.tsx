@@ -60,6 +60,14 @@ interface ChartDataPoint {
   orders: number;
 }
 
+interface Order {
+  id: string;
+  customer: string;
+  product: string;
+  amount: string;
+  status: 'Delivered' | 'Processing' | 'Cancelled';
+}
+
 // =============================================================================
 // TEMPLATE DATA (Mock data for shimmer skeletons)
 // =============================================================================
@@ -125,6 +133,44 @@ const teamTemplate: TeamMember[] = [
     name: 'Loading...',
     role: 'Backend Developer',
     avatar: 'https://via.placeholder.com/40',
+  },
+];
+
+const ordersTemplate: Order[] = [
+  {
+    id: '1',
+    customer: 'Loading Name...',
+    product: 'Loading Product...',
+    amount: '$000.00',
+    status: 'Processing',
+  },
+  {
+    id: '2',
+    customer: 'Loading Name...',
+    product: 'Loading Product...',
+    amount: '$000.00',
+    status: 'Processing',
+  },
+  {
+    id: '3',
+    customer: 'Loading Name...',
+    product: 'Loading Product...',
+    amount: '$000.00',
+    status: 'Processing',
+  },
+  {
+    id: '4',
+    customer: 'Loading Name...',
+    product: 'Loading Product...',
+    amount: '$000.00',
+    status: 'Processing',
+  },
+  {
+    id: '5',
+    customer: 'Loading Name...',
+    product: 'Loading Product...',
+    amount: '$000.00',
+    status: 'Processing',
   },
 ];
 
@@ -210,6 +256,44 @@ const realTeam: TeamMember[] = [
     avatar: 'https://i.pravatar.cc/40?img=12',
   },
   { id: '4', name: 'Jordan Lee', role: 'DevOps', avatar: 'https://i.pravatar.cc/40?img=15' },
+];
+
+const realOrders: Order[] = [
+  {
+    id: '101',
+    customer: 'Alice Freeman',
+    product: 'Pro Plan (Monthly)',
+    amount: '$29.00',
+    status: 'Delivered',
+  },
+  {
+    id: '102',
+    customer: 'Bob Smith',
+    product: 'Enterprise License',
+    amount: '$499.00',
+    status: 'Processing',
+  },
+  {
+    id: '103',
+    customer: 'Charlie Brown',
+    product: 'Basic Plan (Yearly)',
+    amount: '$99.00',
+    status: 'Cancelled',
+  },
+  {
+    id: '104',
+    customer: 'David Wilson',
+    product: 'Pro Plan (monthly)',
+    amount: '$29.00',
+    status: 'Delivered',
+  },
+  {
+    id: '105',
+    customer: 'Eva Green',
+    product: 'Consulting Hour',
+    amount: '$150.00',
+    status: 'Delivered',
+  },
 ];
 
 const realChartData: ChartDataPoint[] = [
@@ -365,7 +449,69 @@ const TeamMembers = ({ members }: { members: TeamMember[] }) => (
   </div>
 );
 
-// =============================================================================
+// Orders Table
+const OrdersTable = ({ orders }: { orders: Order[] }) => (
+  <div className="orders-table-container">
+    <h3 className="section-title">Recent Orders</h3>
+    <table className="orders-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <thead>
+        <tr style={{ borderBottom: '1px solid #eee', textAlign: 'left' }}>
+          <th style={{ padding: '12px 16px' }}>
+            <span>Customer</span>
+          </th>
+          <th style={{ padding: '12px 16px' }}>
+            <span>Product</span>
+          </th>
+          <th style={{ padding: '12px 16px' }}>
+            <span>Amount</span>
+          </th>
+          <th style={{ padding: '12px 16px' }}>
+            <span>Status</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {orders.map((order) => (
+          <tr key={order.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
+            <td style={{ padding: '12px 16px' }}>
+              <div style={{ fontWeight: 500 }}>{order.customer}</div>
+            </td>
+            <td style={{ padding: '12px 16px', color: '#666' }}>
+              <span>{order.product}</span>
+            </td>
+            <td style={{ padding: '12px 16px', fontWeight: 600 }}>
+              <span>{order.amount}</span>
+            </td>
+            <td style={{ padding: '12px 16px' }}>
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '4px 8px',
+                  borderRadius: '12px',
+                  fontSize: '0.85em',
+                  background:
+                    order.status === 'Delivered'
+                      ? '#dcfce7'
+                      : order.status === 'Processing'
+                        ? '#dbeafe'
+                        : '#fee2e2',
+                  color:
+                    order.status === 'Delivered'
+                      ? '#166534'
+                      : order.status === 'Processing'
+                        ? '#1e40af'
+                        : '#991b1b',
+                }}
+              >
+                {order.status}
+              </span>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 // SUSPENSE EXAMPLE - Lazy-loaded Notifications Component
 // =============================================================================
 
@@ -475,11 +621,13 @@ function App() {
   const [loadingTransactions, setLoadingTransactions] = useState(true);
   const [loadingActivity, setLoadingActivity] = useState(true);
   const [loadingTeam, setLoadingTeam] = useState(true);
+  const [loadingOrders, setLoadingOrders] = useState(true);
 
   // Data states
   const [user, setUser] = useState<User | null>(null);
   const [stats, setStats] = useState<StatCard[] | null>(null);
   const [transactions, setTransactions] = useState<Transaction[] | null>(null);
+  const [orders, setOrders] = useState<Order[] | null>(null);
   const [activity, setActivity] = useState<ActivityItem[] | null>(null);
   const [team, setTeam] = useState<TeamMember[] | null>(null);
   const [_chartData, setChartData] = useState<ChartDataPoint[] | null>(null);
@@ -527,6 +675,12 @@ function App() {
       setLoadingTransactions(false);
     }, 2500);
 
+    // Orders load independently
+    setTimeout(() => {
+      setOrders(realOrders);
+      setLoadingOrders(false);
+    }, 1800);
+
     // Context Example loads extra slow (to show off the theme)
     setTimeout(() => {
       setContextData(realTeam.slice(0, 2)); // Use subset of team data
@@ -542,11 +696,13 @@ function App() {
     setLoadingTransactions(true);
     setLoadingActivity(true);
     setLoadingTeam(true);
+    setLoadingOrders(true);
     setLoadingContextExample(true); // Reset context example
     setUser(null);
     setStats(null);
     setChartData(null);
     setTransactions(null);
+    setOrders(null);
     setActivity(null);
     setTeam(null);
     setContextData(null); // Reset context data
@@ -581,6 +737,11 @@ function App() {
       setTransactions(realTransactions);
       setLoadingTransactions(false);
     }, 2500);
+
+    setTimeout(() => {
+      setOrders(realOrders);
+      setLoadingOrders(false);
+    }, 1800);
 
     setTimeout(() => {
       setContextData(realTeam.slice(0, 2));
@@ -621,6 +782,13 @@ function App() {
         <Suspense fallback={<NotificationsShimmerFallback />}>
           <LazyNotificationsPanel notifications={realNotifications} />
         </Suspense>
+      </section>
+
+      {/* Orders Table Section */}
+      <section className="dashboard-section">
+        <Shimmer loading={loadingOrders} templateProps={{ orders: ordersTemplate }}>
+          <OrdersTable orders={orders || ordersTemplate} />
+        </Shimmer>
       </section>
 
       {/* Revenue Chart Section */}

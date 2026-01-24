@@ -334,6 +334,22 @@ For async components (like charts), ensure containers have explicit dimensions s
 - Minimal re-renders - only updates when loading state or children change
 - Lightweight DOM measurements using native browser APIs
 
+### 6. Tables and Merged Shimmers
+
+For tables, the library measures the entire cell (`<td>` or `<th>`), including padding. This can cause adjacent shimmer blocks to touch and merge visually. To prevent this:
+
+Wrap the text content of your cells in `<span>` tags. The library will then measure the `<span>`, treating the cell padding as whitespace.
+
+```tsx
+// ❌ Padded cell causes merging
+<td style={{ padding: '16px' }}>Content</td>
+
+// ✅ Wrapped content preserves spacing
+<td style={{ padding: '16px' }}>
+  <span>Content</span>
+</td>
+```
+
 ## 🛠️ Development
 
 ```bash
