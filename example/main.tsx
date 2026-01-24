@@ -453,19 +453,22 @@ const TeamMembers = ({ members }: { members: TeamMember[] }) => (
 const OrdersTable = ({ orders }: { orders: Order[] }) => (
   <div className="orders-table-container">
     <h3 className="section-title">Recent Orders</h3>
-    <table className="orders-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <table
+      className="orders-table"
+      style={{ width: '100%', borderCollapse: 'collapse', tableLayout: 'fixed' }}
+    >
       <thead>
         <tr style={{ borderBottom: '1px solid #eee', textAlign: 'left' }}>
-          <th style={{ padding: '12px 16px' }}>
+          <th style={{ padding: '12px 16px', width: '25%' }}>
             <span>Customer</span>
           </th>
-          <th style={{ padding: '12px 16px' }}>
+          <th style={{ padding: '12px 16px', width: '40%' }}>
             <span>Product</span>
           </th>
-          <th style={{ padding: '12px 16px' }}>
+          <th style={{ padding: '12px 16px', width: '20%' }}>
             <span>Amount</span>
           </th>
-          <th style={{ padding: '12px 16px' }}>
+          <th style={{ padding: '12px 16px', width: '15%' }}>
             <span>Status</span>
           </th>
         </tr>
@@ -474,7 +477,7 @@ const OrdersTable = ({ orders }: { orders: Order[] }) => (
         {orders.map((order) => (
           <tr key={order.id} style={{ borderBottom: '1px solid #f9f9f9' }}>
             <td style={{ padding: '12px 16px' }}>
-              <div style={{ fontWeight: 500 }}>{order.customer}</div>
+              <span style={{ fontWeight: 500 }}>{order.customer}</span>
             </td>
             <td style={{ padding: '12px 16px', color: '#666' }}>
               <span>{order.product}</span>
