@@ -1,6 +1,6 @@
 {
   "name": "shimmer-from-structure",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A React shimmer/skeleton library that automatically adapts to your component's runtime structure",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
