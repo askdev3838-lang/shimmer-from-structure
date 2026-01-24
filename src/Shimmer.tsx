@@ -142,7 +142,6 @@ export const Shimmer: React.FC<ShimmerProps> = ({
       <style>{`
         .shimmer-measure-container * {
           color: transparent !important;
-          border-color: transparent !important;
         }
         .shimmer-measure-container img,
         .shimmer-measure-container svg,
