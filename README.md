@@ -2,6 +2,9 @@
 
 A **React & Vue** shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
 
+![React](https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Vue](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
+
 ![Shimmer From Structure Demo](https://github.com/darula-hpp/shimmer-from-structure/raw/main/example/preview.gif)
 
 ## Why This Library?
