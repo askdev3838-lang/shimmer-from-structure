@@ -76,6 +76,7 @@
   },
   "dependencies": {
     "-": "^0.0.1",
-    "@vue/test-utils": "^2.4.6"
+    "@vue/test-utils": "^2.4.6",
+    "eslint-plugin-vue": "^10.7.0"
   }
 }

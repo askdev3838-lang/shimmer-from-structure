@@ -1,0 +1,37 @@
+{
+  "name": "@shimmer-from-structure/react",
+  "version": "1.0.0",
+  "description": "React adapter for shimmer-from-structure",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@shimmer-from-structure/core": "*"
+  },
+  "keywords": [
+    "react",
+    "shimmer",
+    "skeleton",
+    "loading"
+  ],
+  "author": "Olebogeng Mbedzi",
+  "license": "MIT"
+}

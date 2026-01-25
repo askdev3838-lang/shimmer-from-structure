@@ -1,0 +1,30 @@
+{
+  "name": "@shimmer-from-structure/core",
+  "version": "1.0.0",
+  "description": "Framework-agnostic DOM measurement utilities for shimmer effects",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "test": "vitest"
+  },
+  "keywords": [
+    "shimmer",
+    "skeleton",
+    "dom",
+    "measurement"
+  ],
+  "author": "Olebogeng Mbedzi",
+  "license": "MIT"
+}

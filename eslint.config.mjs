@@ -6,17 +6,29 @@ import tseslint from 'typescript-eslint';
 import react from 'eslint-plugin-react';
 import prettier from 'eslint-plugin-prettier';
 import eslintConfigPrettier from 'eslint-config-prettier';
+import pluginVue from 'eslint-plugin-vue';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules', 'coverage'] },
+  { ignores: ['dist', 'node_modules', 'coverage', '**/dist/**'] },
+
+  // Base JS recommendations
+  js.configs.recommended,
+
+  // TypeScript recommendations
+  ...tseslint.configs.recommended,
+
+  // Vue recommendations
+  ...pluginVue.configs['flat/essential'],
+
+  // TypeScript Files Configuration (.ts, .tsx)
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      parser: tseslint.parser,
       parserOptions: {
-        project: ['./tsconfig.json', './tsconfig.node.json'],
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
@@ -46,5 +58,43 @@ export default tseslint.config(
       ],
     },
   },
+
+  // Vue Files Configuration (.vue)
+  {
+    files: ['**/*.vue'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      // Note: parser is set by pluginVue configs to vue-eslint-parser
+      parserOptions: {
+        parser: tseslint.parser,
+        projectService: true,
+        extraFileExtensions: ['.vue'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+    plugins: {
+      prettier,
+    },
+    rules: {
+      'vue/multi-word-component-names': 'off',
+      'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
+
+  // Disable type-checking rules for JS files
+  {
+    files: ['**/*.js', '**/*.mjs'],
+    extends: [tseslint.configs.disableTypeChecked],
+  },
+
   eslintConfigPrettier
 );

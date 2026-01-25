@@ -1,0 +1,41 @@
+{
+  "name": "@shimmer-from-structure/vue",
+  "version": "1.0.0",
+  "description": "Vue 3 adapter for shimmer-from-structure",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "vue-tsc && vite build",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "dependencies": {
+    "@shimmer-from-structure/core": "*"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "vue-tsc": "^2.0.0"
+  },
+  "keywords": [
+    "vue",
+    "shimmer",
+    "skeleton",
+    "loading"
+  ],
+  "author": "Olebogeng Mbedzi",
+  "license": "MIT"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "shimmer-from-structure",
+  "version": "1.0.0",
+  "description": "React shimmer library that automatically adapts to your component's runtime structure",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./vue": "@shimmer-from-structure/vue"
+  },
+  "dependencies": {
+    "@shimmer-from-structure/react": "*",
+    "@shimmer-from-structure/vue": "*"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "keywords": [
+    "react",
+    "vue",
+    "shimmer",
+    "skeleton",
+    "loading"
+  ],
+  "author": "Olebogeng Mbedzi",
+  "license": "MIT"
+}
