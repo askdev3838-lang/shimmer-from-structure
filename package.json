@@ -1,24 +1,26 @@
 {
   "name": "shimmer-from-structure",
-  "version": "0.7.0",
-  "description": "A React shimmer/skeleton library that automatically adapts to your component's runtime structure",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for shimmer-from-structure - Framework-agnostic shimmer library",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "test": "vitest",
-    "lint": "eslint .",
+    "build": "npm run build --workspaces --if-present",
+    "build:core": "npm run build -w @shimmer-from-structure/core",
+    "build:react": "npm run build -w @shimmer-from-structure/react",
+    "build:vue": "npm run build -w @shimmer-from-structure/vue",
+    "build:main": "npm run build -w shimmer-from-structure",
+    "dev": "npm run dev --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present -- --run",
+    "lint": "npm run lint --workspaces --if-present",
     "format": "prettier --write .",
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
+    "*.{ts,tsx,vue}": [
       "eslint --fix",
       "prettier --write"
     ],
@@ -28,6 +30,7 @@
   },
   "keywords": [
     "react",
+    "vue",
     "shimmer",
     "skeleton",
     "loading",
@@ -39,10 +42,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/darula-hpp/shimmer-from-structure.git"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",
@@ -72,6 +71,11 @@
     "typescript-eslint": "^8.53.1",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.17"
+    "vitest": "^4.0.17",
+    "vue": "^3.5.13"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "@vue/test-utils": "^2.4.6"
   }
 }

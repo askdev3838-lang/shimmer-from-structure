@@ -1,6 +1,6 @@
 # ✨ Shimmer From Structure
 
-A React shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
+A **React & Vue** shimmer/skeleton library that **automatically adapts to your component's runtime structure**. Unlike traditional shimmer libraries that require pre-defined skeleton structures, this library analyzes your actual component's DOM at runtime and generates a shimmer effect that perfectly matches its layout.
 
 ![Shimmer From Structure Demo](./example/preview.gif)
 
@@ -14,6 +14,7 @@ Traditional shimmer libraries require you to:
 
 **Shimmer From Structure** eliminates all of that:
 
+- ✅ **Works with React & Vue** - Simple, framework-specific drivers
 - ✅ Automatically measures your component's structure at runtime
 - ✅ Generates shimmer effects that match actual dimensions
 - ✅ Zero maintenance - works with any layout changes
@@ -32,7 +33,33 @@ yarn add shimmer-from-structure
 pnpm add shimmer-from-structure
 ```
 
+## 🎯 Framework Support
+
+Shimmer From Structure provides dedicated packages for **React and Vue**.
+
+### React
+
+React support is built-in to the main package for backward compatibility:
+
+```javascript
+// React projects (or @shimmer-from-structure/react)
+import { Shimmer } from 'shimmer-from-structure';
+```
+
+### Vue 3
+
+Vue support requires importing from the specific adapter:
+
+```javascript
+// Vue 3 projects
+import { Shimmer } from '@shimmer-from-structure/vue';
+```
+
+---
+
 # 📖 Basic Usage
+
+## React
 
 ### Static Content
 
@@ -53,6 +80,31 @@ function UserCard() {
   );
 }
 ```
+
+## Vue
+
+### Static Content
+
+```vue
+<script setup>
+import { ref } from 'vue';
+import { Shimmer } from '@shimmer-from-structure/vue';
+
+const isLoading = ref(true);
+</script>
+
+<template>
+  <Shimmer :loading="isLoading">
+    <div class="card">
+      <img src="avatar.jpg" class="avatar" />
+      <h2>John Doe</h2>
+      <p>Software Engineer</p>
+    </div>
+  </Shimmer>
+</template>
+```
+
+---
 
 ### Dynamic Content with `templateProps`
 
@@ -242,10 +294,12 @@ const ShimmerFallback = React.memo(() => (
 
 ## Global Configuration (Context API)
 
-You can set default configuration for your entire app (or specific sections) using `ShimmerProvider`. This is perfect for maintaining consistent themes without repeating props.
+You can set default configuration for your entire app (or specific sections) using the context/provider pattern. This is perfect for maintaining consistent themes without repeating props.
+
+### React
 
 ```tsx
-import { Shimmer, ShimmerProvider } from 'shimmer-from-structure';
+import { Shimmer, ShimmerProvider } from '@shimmer-from-structure/react';
 
 function App() {
   return (
@@ -263,6 +317,26 @@ function App() {
   );
 }
 ```
+
+### Vue
+
+```vue
+<!-- App.vue -->
+<script setup>
+import { Shimmer, provideShimmerConfig } from '@shimmer-from-structure/vue';
+
+provideShimmerConfig({
+  shimmerColor: 'rgba(255, 0, 0, 0.1)',
+  duration: 2,
+});
+</script>
+
+<template>
+  <router-view />
+</template>
+```
+
+---
 
 Components inside the provider automatically inherit values. You can still override them locally:
 
@@ -338,15 +412,23 @@ For async components (like charts), ensure containers have explicit dimensions s
 
 ## 🛠️ Development
 
+This is a monorepo managed with npm workspaces. Each package can be built independently:
+
 ```bash
 # Install dependencies
 npm install
 
-# Run development server with example
-npm run dev
-
-# Build library
+# Build all packages
 npm run build
+
+# Build individual packages
+npm run build:core
+npm run build:react
+npm run build:vue
+npm run build:main
+
+# Run tests
+npm test
 ```
 
 ## 📝 License
@@ -363,15 +445,29 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - **Zero-dimension elements**: Elements with `display: none` or zero dimensions won't be captured
 - **SVG internals**: Only the outer `<svg>` element is captured, not internal paths/shapes
 
+## 🏗️ Monorepo Structure
+
+This library is organized as a monorepo with four packages:
+
+| Package                         | Description                                 | Size     |
+| ------------------------------- | ------------------------------------------- | -------- |
+| `@shimmer-from-structure/core`  | Framework-agnostic DOM utilities            | 1.44 kB  |
+| `@shimmer-from-structure/react` | React adapter                               | 12.84 kB |
+| `@shimmer-from-structure/vue`   | Vue 3 adapter                               | 3.89 kB  |
+| `shimmer-from-structure`        | Main package (React backward compatibility) | 0.93 kB  |
+
+The core package contains all DOM measurement logic, while React and Vue packages are thin wrappers that provide framework-specific APIs.
+
 ## 🚧 Roadmap
 
 - [x] Dynamic data support via `templateProps`
 - [x] Auto border-radius detection
 - [x] Container background visibility
+- [x] **Vue.js adapter** ✨
 - [ ] Better async component support
 - [ ] Customizable shimmer direction (vertical, diagonal)
 - [ ] React Native support
-- [ ] Vue.js adapter
+- [ ] Svelte adapter
 
 ---
 
