@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Framework-agnostic DOM measurement utilities for shimmer effects",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
