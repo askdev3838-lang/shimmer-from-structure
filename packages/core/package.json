@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Framework-agnostic DOM measurement utilities for shimmer effects",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -17,7 +17,9 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "prettier --write .",
+    "prepublishOnly": "cp ../../README.md ."
   },
   "keywords": [
     "shimmer",

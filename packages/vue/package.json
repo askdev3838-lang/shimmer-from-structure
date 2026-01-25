@@ -1,6 +1,6 @@
 {
   "name": "@shimmer-from-structure/vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue 3 adapter for shimmer-from-structure",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -17,7 +17,9 @@
   },
   "scripts": {
     "build": "vue-tsc && vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "prettier --write .",
+    "prepublishOnly": "cp ../../VUE_README.md ./README.md"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
