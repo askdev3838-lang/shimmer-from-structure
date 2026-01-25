@@ -1,7 +1,7 @@
 {
   "name": "shimmer-from-structure",
   "version": "1.0.0",
-  "description": "React shimmer library that automatically adapts to your component's runtime structure",
+  "description": "Universal UI skeleton generator for React and Vue. Auto-adapts to your component structure with zero maintenance and pixel-perfect accuracy.",
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
@@ -12,7 +12,8 @@
     "./vue": "@shimmer-from-structure/vue"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@shimmer-from-structure/react": "*",

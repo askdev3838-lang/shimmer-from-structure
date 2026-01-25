@@ -17,7 +17,8 @@
   },
   "scripts": {
     "build": "tsc && vite build",
-    "test": "vitest"
+    "test": "vitest",
+    "format": "prettier --write ."
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
