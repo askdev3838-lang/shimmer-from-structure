@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-01-27
+
+### Major Features Added
+
+- **Svelte Support**: Introduced full support for Svelte with a dedicated adapter package (`@shimmer-from-structure/svelte`)
+  - Native `<Shimmer>` component
+  - Context helpers `setShimmerConfig` and `getShimmerConfig`
+  - Full support for `templateProps` and reactivity
+  - Parity with React and Vue adapters
+
+### Added
+
+- **Svelte Example App**: Added comprehensive Svelte example showcasing all features (`examples/svelte-example`)
+- **Documentation**: Updated README with complete Svelte documentation, installation guide, and usage examples
+
+### Changes
+
+- **Version Bump**: All packages updated to `1.1.0`
+
 ## [1.0.0] - 2026-01-25
 
 ### Major Features Added
